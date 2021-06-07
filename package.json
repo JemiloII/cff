@@ -20,7 +20,7 @@
     "vue-backtotop": "^1.6.1",
     "vue-carousel": "^0.18.0",
     "vue-toastification": "^0.8.0",
-    "vueperslides": "^2.12.1"
+    "vueperslides": "^2.15.0"
   },
   "devDependencies": {
     "fibers": "^5.0.0",
