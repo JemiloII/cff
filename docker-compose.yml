@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  nuxt:
+    build:
+      context: ./
+      dockerfile: nuxt.dockerfile
+    image: cff-nuxt:latest
+    command: 'npm run dev'
+    volumes:
+    - './:/cff'
+    ports:
+    - 3000:3000
