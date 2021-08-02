@@ -14,7 +14,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.5.2",
     "bootstrap-vue": "^2.17.3",
-    "core-js": "^2.6.12",
+    "core-js": "^3.16.0",
     "firebase": "^7.24.0",
     "nuxt": "^2.14.6",
     "vue-backtotop": "^1.6.1",
