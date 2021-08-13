@@ -1,3 +1,16 @@
+import config from 'config';
+import fs from 'fs';
+
+const certPath = config.get('certPath');
+const server = {https: {}};
+
+if (certPath) {
+  server.https = {
+    key: fs.readFileSync(`${certPath}/privkey.pem`),
+    cert: fs.readFileSync(`${certPath}/cert.pem`)
+  }
+}
+
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -12,9 +25,8 @@ export default {
     ]
   },
 
-  serverMiddleware: {
-    '/api/instagram': '~/api/instagram.js',
-  },
+  server,
+  // serverMiddleware: ["redirect-ssl"],
 
   // Customize the progress-bar color
   loading: { color: '#fff' },
@@ -34,7 +46,11 @@ export default {
     { src: '~/plugins/vue-backtotop', ssr: false },
     { src: '~/plugins/vue-toastification', ssr: false },
     { src: '~/plugins/vueperslides', ssr: false },
-    { src: '~/plugins/firebase' }
+    { src: '~/plugins/firebase' },
+    { src: '~/plugins/vuelidate.js', ssr: false },
+    { src: '~/plugins/vue-signature-pad.js', ssr: false },
+    { src: '~/plugins/vue-async-computed.js', ssr: false },
+    { src: '~/plugins/errors.js', ssr: false },
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -52,6 +68,22 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
+    'nuxt-buefy',
+    [
+      'nuxt-fontawesome',
+      {
+        imports: [
+          {
+            set: '@fortawesome/free-solid-svg-icons',
+            icons: ['fas']
+          },
+          {
+            set: '@fortawesome/free-brands-svg-icons',
+            icons: ['fab']
+          }
+        ]
+      }
+    ]
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)

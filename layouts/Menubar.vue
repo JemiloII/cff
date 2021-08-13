@@ -4,10 +4,9 @@
     <div :class="['navbar-area bg-black', {'is-sticky': isSticky}]">
       <div class="comero-nav">
         <div class="container">
-          <nav class="navbar navbar-expand-md navbar-dark">
-            <nuxt-link class="navbar-brand h1 m-0" to="/"
+          <div class="navbar navbar-expand-md navbar-dark">
+            <nuxt-link class="navbar-brand h1 m-0" to="/">
               Convention Foam Fighting
-              <!--<img src="http://conventionfoamfighting.com/images/cfflogo.jpg" height="75" alt="logo">-->
             </nuxt-link>
 
             <b-navbar-toggle target="navbarSupportedContent"></b-navbar-toggle>
@@ -22,13 +21,13 @@
 <!--                  <nuxt-link to="/products" class="nav-link">Crew</nuxt-link>-->
 <!--                </li>-->
 
-                <li class="nav-item">
-                  <nuxt-link to="/blog" class="nav-link">Blog</nuxt-link>
-                </li>
+<!--                <li class="nav-item">-->
+<!--                  <nuxt-link to="/blog" class="nav-link">Blog</nuxt-link>-->
+<!--                </li>-->
 
-                <li class="nav-item">
-                  <nuxt-link to="/products" class="nav-link">Shop</nuxt-link>
-                </li>
+<!--                <li class="nav-item">-->
+<!--                  <nuxt-link to="/products" class="nav-link">Shop</nuxt-link>-->
+<!--                </li>-->
 
                 <li class="nav-item">
                   <nuxt-link to="/gallery" class="nav-link">Gallery</nuxt-link>
@@ -36,6 +35,10 @@
 
                 <li class="nav-item">
                   <nuxt-link to="/contact" class="nav-link">Contact</nuxt-link>
+                </li>
+
+                <li class="nav-item">
+                  <nuxt-link to="/waiver" class="nav-link">Waiver</nuxt-link>
                 </li>
               </ul>
 
@@ -47,7 +50,7 @@
                 </div>
               </div>
             </b-collapse>
-          </nav>
+          </div>
         </div>
       </div>
     </div>
