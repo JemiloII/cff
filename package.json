@@ -32,7 +32,7 @@
     "vue-signature-pad": "^3.0.1",
     "vue-toastification": "^0.8.0",
     "vuelidate": "^0.7.6",
-    "vueperslides": "^2.12.1"
+    "vueperslides": "^2.15.2"
   },
   "devDependencies": {
     "fibers": "^5.0.0",
