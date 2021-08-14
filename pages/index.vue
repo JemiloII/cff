@@ -25,7 +25,7 @@
     <!--<Category />-->
     <!--<LatestProducts />-->
     <!--<Offer />-->
-    <News/>
+<!--    <News/>-->
     <Partner />
     <Subscribe/>
     <!--<InstagramPhotos/>-->
