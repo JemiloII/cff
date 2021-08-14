@@ -18,7 +18,7 @@
                 </li>
 
 <!--                <li class="nav-item">-->
-<!--                  <nuxt-link to="/products" class="nav-link">Crew</nuxt-link>-->
+<!--                  <nuxt-link to="/productss" class="nav-link">Crew</nuxt-link>-->
 <!--                </li>-->
 
 <!--                <li class="nav-item">-->
@@ -96,3 +96,12 @@
     }
   }
 </script>
+
+<style>
+  @media only screen and (max-width: 767px) {
+    .navbar-area {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+  }
+</style>

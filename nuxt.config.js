@@ -33,11 +33,7 @@ export default {
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
-    './assets/scss/styles/animate.min.css',
-    './assets/scss/styles/fontawesome.min.css',
-    './assets/scss/styles/style.scss',
-    './assets/scss/styles/admin.scss',
-    './assets/scss/styles/responsive.scss'
+    './assets/scss/styles/fontawesome.min.css'
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -50,7 +46,8 @@ export default {
     { src: '~/plugins/vuelidate.js', ssr: false },
     { src: '~/plugins/vue-signature-pad.js', ssr: false },
     { src: '~/plugins/vue-async-computed.js', ssr: false },
-    { src: '~/plugins/errors.js', ssr: false },
+    { src: '~/plugins/qr-code-reader.js', ssr: false, mode: 'client' },
+    { src: '~/plugins/errors.js' },
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -62,13 +59,14 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
+    'nuxt-config/module',
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
-    'nuxt-buefy',
+    ['nuxt-buefy', { css: false, materialDesignIcons: false }],
     [
       'nuxt-fontawesome',
       {
@@ -101,6 +99,9 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    friendlyErrors: false
+    friendlyErrors: false,
+    splitChunks: {
+      layouts: true
+    }
   }
 }

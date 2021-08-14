@@ -22,14 +22,15 @@
 <script>
 export default {
   layout: "admin-waiver",
-  data() {
+  asyncData() {
     return {
       columns: [
         { label: "ID", field: "waiverId" },
         { label: "First", field: "firstName" },
         { label: "Last", field: "lastName" },
         { label: "Email", field: "email" },
-        { label: "D.O.B.", field: "birthday" }
+        { label: "D.O.B.", field: "birthday" },
+        { label: "Sign Date", field: "createdAt" }
       ],
       search: "",
       waivers: []
@@ -45,8 +46,6 @@ export default {
           method: "GET",
           mode: "cors"
         });
-
-        console.log(res);
 
         if (res.ok) {
           const { waivers } = await res.json();

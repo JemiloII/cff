@@ -17,6 +17,12 @@ import Menubar from './Menubar';
 import Footer from './Footer';
 import BackToTop from './BackToTop';
 import SiteLoader from './SiteLoder';
+
+import '@/assets/scss/styles/animate.min.css';
+import '@/assets/scss/styles/style.scss';
+import '@/assets/scss/styles/admin.scss';
+import '@/assets/scss/styles/responsive.scss';
+
 export default {
   components: {
     TopPanel, TopHeader, Menubar, Footer, BackToTop, SiteLoader

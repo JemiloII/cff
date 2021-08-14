@@ -23,12 +23,8 @@
 </template>
 
 <script>
-import { QrcodeStream } from "vue-qrcode-reader";
 export default {
   layout: "admin-waiver",
-  components: {
-    QrcodeStream
-  },
   data() {
     return {
       server: {},
