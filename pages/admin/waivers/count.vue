@@ -15,7 +15,7 @@
         rounded
       />
     </b-field>
-    <b-table :data="counts" :columns="columns" />
+    <b-table :data="totals" :columns="columns" />
   </section>
 </template>
 
