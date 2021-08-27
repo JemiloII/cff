@@ -1,4 +1,4 @@
 module.exports = {
-  clientUrl: "https://nitro.shibiko.io",
-  serverUrl: "https://nitro.shibiko.io:1337"
+  clientUrl: "https://cff.inventx.io",
+  serverUrl: "https://cff.inventx.io:1337"
 };
