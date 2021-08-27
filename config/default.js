@@ -1,9 +1,9 @@
 const defer = require('config/defer').deferConfig;
 
 module.exports = {
-  certPath: 'C:\\Certbot\\live\\nitro.shibiko.io',
-  clientUrl: "https://nitro.shibiko.io",
-  serverUrl: "https://nitro.shibiko.io:1337",
+  certPath: '',
+  clientUrl: "http://localhost",
+  serverUrl: "http://localhost:1337",
 
   client: {
     clientUrl: defer(function () {

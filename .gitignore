@@ -89,3 +89,6 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# Config Locals
+config/local.*

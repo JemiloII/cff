@@ -9,52 +9,13 @@
             <button type="button" class="close" @click="closeSidebarPanel"><span aria-hidden="true">&times;</span>
             </button>
 
-            <div
-              class="modal-body"
-              v-if="cart.length > 0"
-            >
-              <h3>My Cart ({{ cart.length }})</h3>
-
-              <div class="product-cart-content">
-
-                <div
-                  class="product-cart"
-                  v-for="cart in cart"
-                  :key="cart.id"
-                >
-                  <div class="product-image">
-                    <img :src="cart.image" :alt="cart.name"/>
-                  </div>
-
-                  <div class="product-content">
-                    <h3><a href="#">{{ cart.name }}</a></h3>
-                    <span>Blue / XS</span>
-                    <div class="product-price">
-                      <span>{{ cart.quantity }}</span>
-                      <span>x</span>
-                      <span class="price">${{ cart.price }}</span>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="product-cart-subtotal">
-                <span>Subtotal</span>
-
-                <span class="subtotal">${{ cartTotal }}</span>
-              </div>
-
+            <div class="modal-body">
+              <h3>Navigation</h3>
               <div @click="closeSidebarPanel" class="product-cart-btn">
-                <nuxt-link to="/checkout" class="btn btn-primary">Proceed to Checkout</nuxt-link>
-                <nuxt-link to="/cart" class="btn btn-light">View Shopping Cart</nuxt-link>
-              </div>
-            </div>
-            <div class="modal-body" v-else>
-              <h3>Empty!</h3>
-              <div @click="closeSidebarPanel" class="product-cart-btn">
-                <nuxt-link to="/products" class="btn btn-primary">Browse All Time Hot!</nuxt-link>
-                <nuxt-link to="/products" class="btn btn-light">Browse Latest!</nuxt-link>
+                <nuxt-link to="/" class="btn btn-dark" exact-active-class="btn-light">Home</nuxt-link>
+                <nuxt-link to="/gallery" class="btn btn-dark" active-class="btn-light">Gallery</nuxt-link>
+                <nuxt-link to="/contact" class="btn btn-dark" active-class="btn-light">Contact</nuxt-link>
+                <nuxt-link to="/waiver" class="btn btn-dark" active-class="btn-light">Waiver</nuxt-link>
               </div>
             </div>
           </div>

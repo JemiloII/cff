@@ -9,17 +9,13 @@
               Convention Foam Fighting
             </nuxt-link>
 
-            <b-navbar-toggle target="navbarSupportedContent"></b-navbar-toggle>
+            <b-navbar-toggle target="navbarSupportedContent" @click="toggle()"></b-navbar-toggle>
 
             <b-collapse class="collapse navbar-collapse" id="navbarSupportedContent" is-nav>
               <ul class="navbar-nav">
                 <li class="nav-item">
                   <nuxt-link to="/" class="nav-link">Home</nuxt-link>
                 </li>
-
-<!--                <li class="nav-item">-->
-<!--                  <nuxt-link to="/productss" class="nav-link">Crew</nuxt-link>-->
-<!--                </li>-->
 
 <!--                <li class="nav-item">-->
 <!--                  <nuxt-link to="/blog" class="nav-link">Blog</nuxt-link>-->
@@ -41,14 +37,6 @@
                   <nuxt-link to="/waiver" class="nav-link">Waiver</nuxt-link>
                 </li>
               </ul>
-
-              <div class="others-option">
-                <div class="option-item" v-if="cart.length > 0">
-                  <a @click.prevent="toggle" href="#">
-                    Cart({{ cart.length }}) <i class="fas fa-shopping-bag"></i>
-                  </a>
-                </div>
-              </div>
             </b-collapse>
           </div>
         </div>
