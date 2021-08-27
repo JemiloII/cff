@@ -8,7 +8,7 @@
       </b-navbar-item>
     </template>
     <template slot="end">
-      <b-navbar-item :to="{ path: '/admin/scan' }" tag="nuxt-link">
+      <b-navbar-item :to="{ path: '/admin' }" tag="nuxt-link">
         <b-button type="is-primary">
           Scan Code
         </b-button>

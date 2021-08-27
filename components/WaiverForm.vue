@@ -1,6 +1,17 @@
 <template>
   <div class="content">
     <form @submit.prevent="submit()">
+      <b-field class="mb-2" grouped group-multiline>
+        <b-field label="Email" expanded>
+          <b-input
+            v-model.lazy.trim="email"
+            @input.native="checkWaiver()"
+            type="email"
+            required
+          />
+        </b-field>
+      </b-field>
+
       <b-field grouped group-multiline>
         <b-field label="First Name" expanded>
           <b-input
@@ -15,20 +26,43 @@
       </b-field>
 
       <b-field grouped group-multiline>
-        <b-field label="Email" expanded>
+        <b-field label="Month" expanded>
           <b-input
-            v-model.lazy.trim="email"
+            v-model.lazy.trim="month"
             @input.native="checkWaiver()"
-            type="email"
+            type="number"
+            min="1"
+            max="12"
+            pattern="\d{2}"
+            maxlength="2"
             required
+            placeholder="MM"
           />
         </b-field>
-        <b-field label="Date of Birth" expanded>
-          <b-datepicker
-            v-model="birthday"
-            placeholder="Click to select..."
-            editable
+        <b-field label="Day" expanded>
+          <b-input
+            v-model.lazy.trim="day"
+            @input.native="checkWaiver()"
+            type="number"
+            min="1"
+            max="31"
+            maxlength="2"
+            pattern="\d{2}"
             required
+            placeholder="DD"
+          />
+        </b-field>
+        <b-field label="Year" expanded>
+          <b-input
+            v-model.lazy.trim="year"
+            @input.native="checkWaiver()"
+            type="number"
+            min="1900"
+            max="2050"
+            pattern="\d{4}"
+            maxlength="4"
+            required
+            placeholder="YYYY"
           />
         </b-field>
       </b-field>
@@ -63,7 +97,7 @@
 </template>
 
 <script>
-import { alpha, email, required } from "vuelidate/lib/validators";
+import { email, numeric, required } from "vuelidate/lib/validators";
 
 export default {
   props: {
@@ -78,10 +112,12 @@ export default {
   },
   data() {
     return {
+      month: undefined,
+      day: undefined,
+      year: undefined,
       email: undefined,
       firstName: undefined,
       lastName: undefined,
-      birthday: undefined,
       parent: {
         email: undefined,
         firstName: undefined,
@@ -95,11 +131,23 @@ export default {
       const today = new Date();
       const eighteenYears = 1000 * 3600 * 24 * 365 * 18;
       return today - birthday > eighteenYears;
+    },
+    birthday() {
+      return this.year && this.month && this.day ? `${this.year}-${this.month}-${this.day}` : undefined;
     }
   },
   validations: {
-    birthday: {
-      required
+    month: {
+      required,
+      numeric
+    },
+    day: {
+      required,
+      numeric
+    },
+    year: {
+      required,
+      numeric
     },
     email: {
       email,

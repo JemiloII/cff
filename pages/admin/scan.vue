@@ -53,10 +53,10 @@ export default {
       console.log(dob);
       return now - dob > 180000;
     },
-    async fetchServerData(result) {
+    async fetchServerData(email) {
       try {
         const url = new URL(`${this.$config.serverUrl}/waivers`);
-        url.search = new URLSearchParams({ search: result.email }).toString();
+        url.search = new URLSearchParams({ email }).toString();
 
         const res = await fetch(url.toString(), {
           method: "GET",
