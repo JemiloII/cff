@@ -13,6 +13,11 @@
           Scan Code
         </b-button>
       </b-navbar-item>
+      <b-navbar-item :to="{ path: '/admin/totals' }" tag="nuxt-link">
+        <b-button type="is-primary">
+          Totals
+        </b-button>
+      </b-navbar-item>
       <b-navbar-item :to="{ path: '/admin/waivers' }" tag="nuxt-link">
         <b-button type="is-primary">
           Waivers

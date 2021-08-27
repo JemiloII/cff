@@ -2,18 +2,8 @@
   <section class="section">
     <b-field grouped group-multiline>
       <label class="title is-2">
-        Total Checkin Counts
+        Total Checkins
       </label>
-      <b-input
-        v-model="search"
-        type="search"
-        icon="magnify"
-        size="is-medium"
-        custom-class="is-primary"
-        placeholder="Search..."
-        @input.native="loadTotals(true)"
-        rounded
-      />
     </b-field>
     <b-table :data="totals" :columns="columns" />
   </section>
@@ -21,7 +11,7 @@
 
 <script>
 export default {
-  layout: "admin",
+  layout: "admin-waiver",
   data() {
     return {
       columns: [
@@ -36,7 +26,6 @@ export default {
     async loadTotals(ignoreTimeout = false) {
       try {
         const url = new URL(`${this.$config.serverUrl}/checkin`);
-        url.search = new URLSearchParams({ search: this.search }).toString();
 
         const res = await fetch(url.toString(), {
           method: "GET",
