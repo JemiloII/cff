@@ -169,14 +169,14 @@
   max-height: 55vh;
   overflow: scroll;
   scroll-behavior: smooth;
-  border: 1px solid #7957d5;
+  border: 1px solid var(--dark);
   border-radius: 0.5rem;
   padding: 1em 1em 0;
-  background: lavender;
+  background: #ddd;
 }
 
 hr {
-  border-top: 1px solid #7957d5;
+  border-top: 1px solid var(--dark);
 }
 
 ol {
@@ -196,7 +196,12 @@ ol > li::before {
   font-size: 1.25em;
   font-weight: 600;
   line-height: 1em;
-  color: #7957d5;
+  color: var(--dark);
+}
+
+input.checkbox {
+  transform: scale(1.5);
+  margin: 1rem;
 }
 
 h4 {

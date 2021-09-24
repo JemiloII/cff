@@ -2,9 +2,10 @@ import config from 'config';
 import fs from 'fs';
 
 const certPath = config.get('certPath');
-const server = {https: {}};
+const server = {http: {}};
 
 if (certPath) {
+  delete server.http;
   server.https = {
     key: fs.readFileSync(`${certPath}/privkey.pem`),
     cert: fs.readFileSync(`${certPath}/cert.pem`)

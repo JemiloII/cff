@@ -13,6 +13,7 @@ export default {
 </script>
 
 <style>
+  /* #4a4a4a */
   /*! Buefy v0.8.20 | MIT License | github.com/buefy/buefy */
   .is-noscroll {
     position: fixed;
@@ -16664,4 +16665,34 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
     }
   }
 
+  nav[role=navigation] {
+    background-color: #4a4a4a;
+    color: white;
+  }
+
+  nav a {
+    font-size: 1.25rem;
+    color: white;
+  }
+
+  nav a:hover {
+    color: white;
+    text-decoration: none;
+  }
+
+  .b-steps .steps .step-items .step-item::before, .b-steps .steps .step-items .step-item::after {
+      background: #4a4a4a;
+  }
+
+  .b-steps .steps .step-items .step-item.is-active .step-marker {
+      background-color: white;
+      border-color: #4a4a4a;
+      color: #4a4a4a;
+  }
+
+  .input:focus {
+    box-shadow: 0 0 0 0.125em #343a40;
+    border-color: #ccc;
+    border-size: 1px;
+  }
 </style>

@@ -10,7 +10,7 @@
     <template slot="end">
       <b-navbar-item>
         <a href="/waiver">
-          <b-button type="is-primary">
+          <b-button type="is-secondary">
             New Waiver
           </b-button>
         </a>

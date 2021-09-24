@@ -3,7 +3,7 @@
     <!-- Start Main Banner Area -->
     <div class="home-slides-two">
       <carousel
-        :autoplay=false
+        :autoplay=true
         :autoplayTimeout=1500
         :loop=false
         :centerMode=true
@@ -28,6 +28,7 @@
             <div class="d-table">
               <div class="d-table-cell">
                 <div class="container">
+                  <img class="logo" src="~/assets/img/logo/cff-logo.jpg">
                 </div>
               </div>
             </div>

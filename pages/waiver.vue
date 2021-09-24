@@ -9,7 +9,7 @@
         </b-step-item>
         <b-step-item label="Terms & Agreements">
           <Terms/>
-          <b-button @click="next({})" class="title is-5 is-primary">
+          <b-button @click="next({})" class="title is-5 is-dark">
             Accept
           </b-button>
         </b-step-item>
@@ -35,16 +35,16 @@
             </label>
           </b-field>
 
-          <b-button @click="save" type="is-primary">Submit</b-button>
+          <b-button @click="save" type="is-dark">Submit</b-button>
         </b-step-item>
         <b-step-item label="Confirmation">
           <div class="columns">
             <div class="column is-one-third is-offset-4">
               <div class="card">
                 <div class="card-content has-text-centered">
-                <span class="title is-2">
-                  Completed!
-                </span>
+                  <span class="title is-2">
+                    Completed!
+                  </span>
                 </div>
 
                 <div class="card-image">
@@ -145,7 +145,7 @@
 
 <style scoped>
   .signature {
-    border: 2px solid #7957d5;
+    border: 2px solid var(--dark);
     border-radius: 25px;
   }
 
@@ -158,7 +158,12 @@
   }
 
   .card-content {
-    background-color: lavender;
+    background-color: lightgrey;
+  }
+
+  input.checkbox {
+    transform: scale(1.5);
+    margin: 1rem;
   }
 
   @media only screen and (max-width: 499px) {

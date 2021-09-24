@@ -1,9 +1,10 @@
 <template>
   <div class="content">
-    <form @submit.prevent="submit()">
+    <form class="is-dark" @submit.prevent="submit()">
       <b-field class="mb-2" grouped group-multiline>
         <b-field label="Email" expanded>
           <b-input
+            class="is-dark"
             v-model.lazy.trim="email"
             @input.native="checkWaiver()"
             type="email"
@@ -15,19 +16,21 @@
       <b-field grouped group-multiline>
         <b-field label="First Name" expanded>
           <b-input
+            class="is-dark"
             v-model.trim="firstName"
             @change.native="checkWaiver()"
             required
           />
         </b-field>
         <b-field label="Last Name" expanded>
-          <b-input v-model.trim="lastName" @change.native="checkWaiver()" required />
+          <b-input class="is-dark" v-model.trim="lastName" @change.native="checkWaiver()" required />
         </b-field>
       </b-field>
 
       <b-field grouped group-multiline>
         <b-field label="Month" expanded>
           <b-input
+            class="is-dark"
             v-model.lazy.trim="month"
             @input.native="checkWaiver()"
             type="number"
@@ -41,6 +44,7 @@
         </b-field>
         <b-field label="Day" expanded>
           <b-input
+            class="is-dark"
             v-model.lazy.trim="day"
             @input.native="checkWaiver()"
             type="number"
@@ -54,6 +58,7 @@
         </b-field>
         <b-field label="Year" expanded>
           <b-input
+            class="is-dark"
             v-model.lazy.trim="year"
             @input.native="checkWaiver()"
             type="number"
@@ -77,19 +82,19 @@
         <h4 class="title is-4">Parent or Guardian</h4>
         <b-field grouped group-multiline>
           <b-field label="First Name" expanded>
-            <b-input v-model="parent.firstName" required />
+            <b-input class="is-dark" v-model="parent.firstName" required />
           </b-field>
           <b-field label="Last Name" expanded>
-            <b-input v-model="parent.lastName" required />
+            <b-input class="is-dark" v-model="parent.lastName" required />
           </b-field>
         </b-field>
 
         <b-field label="Email" expanded>
-          <b-input v-model="parent.email" type="email" required />
+          <b-input class="is-dark" v-model="parent.email" type="email" required />
         </b-field>
       </div>
 
-      <button class="button is-primary" type="submit">
+      <button class="button is-dark" type="submit">
         Terms & Agreements
       </button>
     </form>
@@ -245,6 +250,16 @@ button[type="submit"] {
 
 .switch:hover input[type="checkbox"] + .check {
   background: #ff3860 !important;
+}
+
+.input:focus {
+  box-shadow: 0 0 0 0.125em #343a40 !important;
+  border-color: #343a40 !important;
+}
+
+input.checkbox {
+  transform: scale(1.5);
+  margin: 1rem;
 }
 
 @media only screen and (max-width: 499px) {
