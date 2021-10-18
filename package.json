@@ -31,7 +31,7 @@
     "vue-carousel": "^0.18.0",
     "vue-qrcode-reader": "^3.0.3",
     "vue-signature-pad": "^2.0.4",
-    "vue-toastification": "^0.8.0",
+    "vue-toastification": "^1.7.12",
     "vuelidate": "^0.7.6",
     "vueperslides": "^2.12.1"
   },
