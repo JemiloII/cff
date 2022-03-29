@@ -22,8 +22,8 @@
       </div>
     </section>
     <Partner />
-    <Subscribe/>
     <Testimonials />
+    <Subscribe/>
   </div>
 </template>
 
