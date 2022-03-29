@@ -22,17 +22,6 @@
             </div>
           </div>
         </slide>
-
-        <slide>
-          <div class="banner-section header-bg1">
-            <div class="d-table">
-              <div class="d-table-cell">
-                <div class="container">
-                </div>
-              </div>
-            </div>
-          </div>
-        </slide>
       </carousel>
     </div>
     <!-- End Main Banner Area -->

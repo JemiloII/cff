@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <section class="contact-area ptb-60">
+    <section class="contact-area pt-4 pb-60">
       <div class="container">
         <div class="section-title page-title mb-4 border-0">
           <h2><span class="dot"></span> Contact Us</h2>
@@ -67,7 +67,7 @@
             </div>
           </div>
 
-          <div class="col-lg-5 col-md-12">
+          <div class="col-lg-5 col-md-12 pt-60">
             <div class="contact-info">
               <h3>Here to Help</h3>
               <p>Have a question?</p>

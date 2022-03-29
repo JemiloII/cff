@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <section class="gallery-area ptb-60">
+    <section class="gallery-area pt-4 pb-60">
       <div class="container">
         <div class="section-title page-title mb-4 border-0">
           <h2><span class="dot"></span> Gallery</h2>
