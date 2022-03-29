@@ -1,5 +1,5 @@
 <template>
-  <img :src="qrcode" alt="qr code" />
+  <img :src="code" alt="qr code" />
 </template>
 
 <script>
@@ -11,14 +11,14 @@ export default {
       type: Object,
       default() {
         return {
-          qrcode: ''
+          code: ''
         };
       }
     }
   },
   asyncComputed: {
-    qrcode() {
-      return qrcode.toDataURL(JSON.stringify(this.waiver));
+    code() {
+      return qrcode.toDataURL(JSON.stringify(this.waiver)) || '';
     }
   }
 };
