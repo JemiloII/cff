@@ -13,6 +13,10 @@
         </b-field>
       </b-field>
 
+      <h3 class="h3" v-if="additionalChildren.length">
+        Child 1
+      </h3>
+
       <b-field grouped group-multiline>
         <b-field label="First Name" expanded>
           <b-input
@@ -72,6 +76,81 @@
         </b-field>
       </b-field>
 
+      <div id="add-child" v-for="(child, i) in additionalChildren">
+        <h3 class="h3">
+          Child {{i + 2}}
+        </h3>
+        <b-field class="mb-2" grouped group-multiline>
+          <b-field label="Email" expanded>
+            <b-input
+              class="is-dark"
+              v-model.lazy.trim="child.email"
+              type="email"
+              required
+            />
+          </b-field>
+        </b-field>
+
+        <b-field grouped group-multiline>
+          <b-field label="First Name" expanded>
+            <b-input
+              class="is-dark"
+              v-model.trim="child.firstName"
+              required
+            />
+          </b-field>
+          <b-field label="Last Name" expanded>
+            <b-input class="is-dark" v-model.trim="child.lastName" required />
+          </b-field>
+        </b-field>
+
+        <b-field grouped group-multiline>
+          <b-field label="Month" expanded>
+            <b-input
+              class="is-dark"
+              v-model.lazy.trim="child.month"
+              type="number"
+              min="1"
+              max="12"
+              pattern="\d{2}"
+              maxlength="2"
+              required
+              placeholder="MM"
+            />
+          </b-field>
+          <b-field label="Day" expanded>
+            <b-input
+              class="is-dark"
+              v-model.lazy.trim="child.day"
+              type="number"
+              min="1"
+              max="31"
+              maxlength="2"
+              pattern="\d{2}"
+              required
+              placeholder="DD"
+            />
+          </b-field>
+          <b-field label="Year" expanded>
+            <b-input
+              class="is-dark"
+              v-model.lazy.trim="child.year"
+              type="number"
+              min="1900"
+              max="2050"
+              pattern="\d{4}"
+              maxlength="4"
+              required
+              placeholder="YYYY"
+            />
+          </b-field>
+        </b-field>
+
+        <button class="button is-danger" @click="removeChild(i)">
+          Remove Child
+        </button>
+      </div>
+
       <div v-if="!adult && birthday !== undefined">
         <div class="notification is-danger">
           <strong>
@@ -92,6 +171,10 @@
         <b-field label="Email" expanded>
           <b-input class="is-dark" v-model="parent.email" type="email" required />
         </b-field>
+
+        <button class="button is-primary" @click="addChild()">
+          Add Child
+        </button>
       </div>
 
       <button class="button is-dark" type="submit">
@@ -123,6 +206,7 @@ export default {
       email: undefined,
       firstName: undefined,
       lastName: undefined,
+      additionalChildren: [],
       parent: {
         email: undefined,
         firstName: undefined,
@@ -187,6 +271,19 @@ export default {
     }
   },
   methods: {
+    addChild() {
+      this.additionalChildren.push({
+        month: undefined,
+        day: undefined,
+        year: undefined,
+        email: this.parent.email || this.email,
+        firstName: undefined,
+        lastName: this.parent.lastName || this.lastName,
+      });
+    },
+    removeChild(i) {
+      this.additionalChildren.splice(i, 1);
+    },
     async checkWaiver() {
       const { firstName, lastName, email, $v } = this;
       if (
@@ -216,8 +313,28 @@ export default {
         }
       }
     },
+    formatBirthday(year, month, day) {
+      return year && month && day ? `${year}-${month}-${day}` : undefined;
+    },
+    formatAdditionalChildren() {
+      return this.additionalChildren.map(child => {
+        const { email, firstName, lastName, year, month, day } = child;
+        const { parent } = this;
+        const birthday = this.formatBirthday(year, month, day);
+
+        return {
+          adult: false,
+          birthday,
+          email,
+          firstName,
+          lastName,
+          parent
+        }
+      });
+    },
     submit() {
       const { adult, birthday, email, firstName, lastName, parent } = this;
+      const additionalChildren = this.formatAdditionalChildren();
 
       if (!this.$v.$invalid) {
         this.setWaiver({
@@ -226,6 +343,7 @@ export default {
           email,
           firstName,
           lastName,
+          additionalChildren,
           parent
         });
         this.next({});
