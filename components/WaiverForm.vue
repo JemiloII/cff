@@ -334,7 +334,7 @@ export default {
     },
     submit() {
       const { adult, birthday, email, firstName, lastName, parent } = this;
-      const additionalChildren = this.formatAdditionalChildren();
+      const children = this.formatAdditionalChildren();
 
       if (!this.$v.$invalid) {
         this.setWaiver({
@@ -343,7 +343,7 @@ export default {
           email,
           firstName,
           lastName,
-          additionalChildren,
+          children,
           parent
         });
         this.next({});
