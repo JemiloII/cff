@@ -58,7 +58,6 @@
           <b-input
             class="is-dark"
             v-model.lazy.trim="month"
-            @input.native="checkWaiver()"
             type="number"
             min="1"
             max="12"
@@ -72,7 +71,6 @@
           <b-input
             class="is-dark"
             v-model.lazy.trim="day"
-            @input.native="checkWaiver()"
             type="number"
             min="1"
             max="31"
@@ -86,7 +84,6 @@
           <b-input
             class="is-dark"
             v-model.lazy.trim="year"
-            @input.native="this.year && this.year.length === 4 && checkWaiver()"
             type="number"
             min="1900"
             max="2050"
@@ -129,7 +126,7 @@
             />
           </b-field>
           <b-field label="Last Name" expanded>
-            <b-input class="is-dark" v-model.trim="child.lastName" required/>
+            <b-input class="is-dark" v-model.trim="child.lastName" required />
           </b-field>
         </b-field>
 
