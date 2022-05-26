@@ -1,5 +1,5 @@
 <template>
-  <section class="section">
+  <section class="section" style="z-index: -200;">
     <h2 class="title is-2">
       Scan Code Below
     </h2>
