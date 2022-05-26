@@ -1,6 +1,32 @@
 <template>
   <div class="content">
     <form class="is-dark" @submit.prevent="submit()">
+      <div v-if="!adult && birthday !== undefined">
+        <div class="notification is-danger">
+          <strong>
+            Parent or guardian is required to complete this waiver.
+          </strong>
+        </div>
+
+        <h4 class="title is-4">Parent or Guardian</h4>
+        <b-field grouped group-multiline>
+          <b-field label="First Name" expanded>
+            <b-input class="is-dark" v-model="parent.firstName" required/>
+          </b-field>
+          <b-field label="Last Name" expanded>
+            <b-input class="is-dark" v-model="parent.lastName" required/>
+          </b-field>
+        </b-field>
+
+        <b-field label="Email" expanded>
+          <b-input class="is-dark" v-model="parent.email" type="email" required/>
+        </b-field>
+      </div>
+
+      <h3 class="h3" v-if="!adult && birthday !== undefined && year.length === 4">
+        Child 1
+      </h3>
+
       <b-field class="mb-2" grouped group-multiline>
         <b-field label="Email" expanded>
           <b-input
@@ -13,10 +39,6 @@
         </b-field>
       </b-field>
 
-      <h3 class="h3" v-if="additionalChildren.length">
-        Child 1
-      </h3>
-
       <b-field grouped group-multiline>
         <b-field label="First Name" expanded>
           <b-input
@@ -27,7 +49,7 @@
           />
         </b-field>
         <b-field label="Last Name" expanded>
-          <b-input class="is-dark" v-model.trim="lastName" @change.native="checkWaiver()" required />
+          <b-input class="is-dark" v-model.trim="lastName" @change.native="checkWaiver()" required/>
         </b-field>
       </b-field>
 
@@ -64,7 +86,7 @@
           <b-input
             class="is-dark"
             v-model.lazy.trim="year"
-            @input.native="checkWaiver()"
+            @input.native="this.year && this.year.length === 4 && checkWaiver()"
             type="number"
             min="1900"
             max="2050"
@@ -76,9 +98,16 @@
         </b-field>
       </b-field>
 
+      <b-field class="pb-2 justify-content-end" v-if="!adult && additionalChildren.length === 0">
+        <div>&nbsp;</div>
+        <button class="button is-success" @click="addChild()">
+          Add Child
+        </button>
+      </b-field>
+
       <div id="add-child" v-for="(child, i) in additionalChildren">
         <h3 class="h3">
-          Child {{i + 2}}
+          Child {{ i + 2 }}
         </h3>
         <b-field class="mb-2" grouped group-multiline>
           <b-field label="Email" expanded>
@@ -100,7 +129,7 @@
             />
           </b-field>
           <b-field label="Last Name" expanded>
-            <b-input class="is-dark" v-model.trim="child.lastName" required />
+            <b-input class="is-dark" v-model.trim="child.lastName" required/>
           </b-field>
         </b-field>
 
@@ -146,56 +175,42 @@
           </b-field>
         </b-field>
 
-        <button class="button is-danger" @click="removeChild(i)">
-          Remove Child
-        </button>
+        <b-field class="pb-2 justify-content-end">
+          <div>&nbsp;</div>
+          <button class="button is-success mr-1" v-if="additionalChildren.length - 1 === i" @click="addChild()">
+            Add Child
+          </button>
+
+          <button class="button is-danger" @click="removeChild(i)">
+            Remove Child
+          </button>
+        </b-field>
       </div>
 
-      <div v-if="!adult && birthday !== undefined">
-        <div class="notification is-danger">
-          <strong>
-            Parent or guardian is required to complete this waiver.
-          </strong>
-        </div>
-
-        <h4 class="title is-4">Parent or Guardian</h4>
-        <b-field grouped group-multiline>
-          <b-field label="First Name" expanded>
-            <b-input class="is-dark" v-model="parent.firstName" required />
-          </b-field>
-          <b-field label="Last Name" expanded>
-            <b-input class="is-dark" v-model="parent.lastName" required />
-          </b-field>
-        </b-field>
-
-        <b-field label="Email" expanded>
-          <b-input class="is-dark" v-model="parent.email" type="email" required />
-        </b-field>
-
-        <button class="button is-primary" @click="addChild()">
-          Add Child
+      <b-field class="w-100 justify-content-end">
+        <div>&nbsp;</div>
+        <button class="button is-dark" type="submit">
+          Terms & Agreements
         </button>
-      </div>
-
-      <button class="button is-dark" type="submit">
-        Terms & Agreements
-      </button>
+      </b-field>
     </form>
   </div>
 </template>
 
 <script>
-import { email, numeric, required } from "vuelidate/lib/validators";
+import {email, numeric, required} from "vuelidate/lib/validators";
 
 export default {
   props: {
     setWaiver: {
       type: Function,
-      default() {}
+      default() {
+      }
     },
     next: {
       type: Function,
-      default() {}
+      default() {
+      }
     }
   },
   data() {
@@ -219,7 +234,7 @@ export default {
       const birthday = new Date(this.birthday);
       const today = new Date();
       const eighteenYears = 1000 * 3600 * 24 * 365 * 18;
-      return today - birthday > eighteenYears;
+      return this.year === undefined || this.year.length < 4 || today - birthday > eighteenYears;
     },
     birthday() {
       return this.year && this.month && this.day ? `${this.year}-${this.month}-${this.day}` : undefined;
@@ -285,7 +300,7 @@ export default {
       this.additionalChildren.splice(i, 1);
     },
     async checkWaiver() {
-      const { firstName, lastName, email, $v } = this;
+      const {firstName, lastName, email, $v} = this;
       if (
         firstName &&
         lastName &&
@@ -301,14 +316,14 @@ export default {
           email
         }).toString();
 
-        const res = await fetch(url.toString(), { mode: "cors" });
+        const res = await fetch(url.toString(), {mode: "cors"});
         if (res.ok) {
           const json = await res.json();
           if (json.length > 0) {
             json[0].accept = true;
             json[0].signature = true;
             this.setWaiver(json[0]);
-            this.next({ step: 3 });
+            this.next({step: 3});
           }
         }
       }
@@ -318,8 +333,8 @@ export default {
     },
     formatAdditionalChildren() {
       return this.additionalChildren.map(child => {
-        const { email, firstName, lastName, year, month, day } = child;
-        const { parent } = this;
+        const {email, firstName, lastName, year, month, day} = child;
+        const {parent} = this;
         const birthday = this.formatBirthday(year, month, day);
 
         return {
@@ -333,7 +348,7 @@ export default {
       });
     },
     submit() {
-      const { adult, birthday, email, firstName, lastName, parent } = this;
+      const {adult, birthday, email, firstName, lastName, parent} = this;
       const children = this.formatAdditionalChildren();
 
       if (!this.$v.$invalid) {

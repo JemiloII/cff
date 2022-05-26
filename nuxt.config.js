@@ -47,6 +47,7 @@ export default {
     { src: '~/plugins/vuelidate.js', ssr: false },
     { src: '~/plugins/vue-signature-pad.js', ssr: false },
     { src: '~/plugins/vue-async-computed.js', ssr: false },
+    { src: '~/plugins/vue-the-mask.js', ssr: false, mode: 'client' },
     { src: '~/plugins/qr-code-reader.js', ssr: false, mode: 'client' },
     { src: '~/plugins/errors.js' },
   ],
