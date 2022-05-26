@@ -1,5 +1,5 @@
 <template>
-  <b-navbar>
+  <b-navbar style="z-index: 100;">
     <template slot="brand">
       <b-navbar-item :to="{ path: '/admin' }" tag="nuxt-link">
         <h4 class="title is-4">
