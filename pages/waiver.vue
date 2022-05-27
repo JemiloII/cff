@@ -3,7 +3,7 @@
     <Nav/>
     <br>
     <div class="container">
-      <b-steps v-model="activeStep" :has-navigation="false">
+      <b-steps type="is-dark" v-model="activeStep" :has-navigation="false">
         <b-step-item label="Waiver">
           <WaiverForm :setWaiver="setWaiver" :next="next"/>
         </b-step-item>
@@ -28,8 +28,8 @@
           </b-field>
 
           <b-field class="bottom">
-            <label class="checkbox">
-              <input v-model="waiver.accept" type="checkbox" required/>
+            <label class="checkbox is-size-4 align-items-center">
+              <input v-model="waiver.accept" type="checkbox" class="mr-2" required/>
               I agree to the
               <a @click="next({ step: 3 })">terms and conditions</a>.
             </label>
@@ -162,7 +162,8 @@
   }
 
   input.checkbox {
-    transform: scale(1.5);
+    width: 1.5rem;
+    height: 1.5rem;
     margin: 1rem;
   }
 
