@@ -45,11 +45,18 @@
             class="is-dark"
             v-model.trim="firstName"
             @change.native="checkWaiver()"
+            type="text"
             required
           />
         </b-field>
         <b-field label="Last Name" expanded>
-          <b-input class="is-dark" v-model.trim="lastName" @change.native="checkWaiver()" required/>
+          <b-input
+            class="is-dark"
+            v-model.trim="lastName"
+            @change.native="checkWaiver()"
+            type="text"
+            required
+          />
         </b-field>
       </b-field>
 
