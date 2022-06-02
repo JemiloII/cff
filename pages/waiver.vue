@@ -8,7 +8,7 @@
           <WaiverForm :setWaiver="setWaiver" :next="next"/>
         </b-step-item>
         <b-step-item label="Terms & Agreements">
-          <Terms/>
+          <Terms />
           <b-button @click="next({})" class="title is-5 is-dark">
             Accept
           </b-button>

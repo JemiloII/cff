@@ -9,19 +9,33 @@
         </div>
 
         <h4 class="title is-4">Parent or Guardian</h4>
-        <b-field grouped group-multiline>
-          <b-field label="First Name" expanded>
-            <b-input class="is-dark" v-model="parent.firstName" required/>
-          </b-field>
-          <b-field label="Last Name" expanded>
-            <b-input class="is-dark" v-model="parent.lastName" required/>
-          </b-field>
-        </b-field>
-
-        <b-field label="Email" expanded>
+        <b-field label="Parent Email" expanded>
           <b-input class="is-dark" v-model="parent.email" type="email" required/>
         </b-field>
+
+        <b-field grouped group-multiline>
+          <b-field label="Parent First Name" expanded>
+            <b-input
+              class="is-dark"
+              type="text"
+              v-model="parent.firstName"
+              @focus="forceTextField($event)"
+              required
+            />
+          </b-field>
+          <b-field label="Parent Last Name" expanded>
+            <b-input
+              class="is-dark"
+              type="text"
+              v-model="parent.lastName"
+              @focus="forceTextField($event)"
+              required
+            />
+          </b-field>
+        </b-field>
       </div>
+
+      <h3 class="h3" v-if="adult">Participant</h3>
 
       <h3 class="h3" v-if="!adult && birthday !== undefined && year.length === 4">
         Child 1
@@ -45,7 +59,9 @@
             class="is-dark"
             v-model.trim="firstName"
             @change.native="checkWaiver()"
+            @focus="forceTextField($event)"
             type="text"
+            :key="'participantFirstName'"
             required
           />
         </b-field>
@@ -54,12 +70,15 @@
             class="is-dark"
             v-model.trim="lastName"
             @change.native="checkWaiver()"
+            @focus="forceTextField($event)"
             type="text"
+            :key="'participantLastName'"
             required
           />
         </b-field>
       </b-field>
 
+      <h4 class="h4">Birthday</h4>
       <b-field grouped group-multiline>
         <b-field label="Month" expanded>
           <b-input
@@ -68,7 +87,7 @@
             type="number"
             min="1"
             max="12"
-            pattern="\d{2}"
+            v-mask="['##']"
             maxlength="2"
             required
             placeholder="MM"
@@ -82,7 +101,7 @@
             min="1"
             max="31"
             maxlength="2"
-            pattern="\d{2}"
+            v-mask="['##']"
             required
             placeholder="DD"
           />
@@ -90,11 +109,11 @@
         <b-field label="Year" expanded>
           <b-input
             class="is-dark"
-            v-model.lazy.trim="year"
+            v-model.lazy="year"
             type="number"
             min="1900"
             max="2050"
-            pattern="\d{4}"
+            v-mask="['####']"
             maxlength="4"
             required
             placeholder="YYYY"
@@ -116,6 +135,7 @@
         <b-field class="mb-2" grouped group-multiline>
           <b-field label="Email" expanded>
             <b-input
+              :key="'email-child-' + (i + 2)"
               class="is-dark"
               v-model.lazy.trim="child.email"
               type="email"
@@ -127,19 +147,31 @@
         <b-field grouped group-multiline>
           <b-field label="First Name" expanded>
             <b-input
+              :key="'firstName-child-' + (i + 2)"
               class="is-dark"
+              type="text"
               v-model.trim="child.firstName"
+              @focus="forceTextField($event)"
               required
             />
           </b-field>
           <b-field label="Last Name" expanded>
-            <b-input class="is-dark" v-model.trim="child.lastName" required />
+            <b-input
+              :key="'lastName-child-' + (i + 2)"
+              class="is-dark"
+              type="text"
+              v-model.trim="child.lastName"
+              @focus="forceTextField($event)"
+              required
+            />
           </b-field>
         </b-field>
 
+        <h4 class="h4">Birthday</h4>
         <b-field grouped group-multiline>
           <b-field label="Month" expanded>
             <b-input
+              :key="'month-child-' + (i + 2)"
               class="is-dark"
               v-model.lazy.trim="child.month"
               type="number"
@@ -153,6 +185,7 @@
           </b-field>
           <b-field label="Day" expanded>
             <b-input
+              :key="'day-child-' + (i + 2)"
               class="is-dark"
               v-model.lazy.trim="child.day"
               type="number"
@@ -166,6 +199,7 @@
           </b-field>
           <b-field label="Year" expanded>
             <b-input
+              :key="'year-child-' + (i + 2)"
               class="is-dark"
               v-model.lazy.trim="child.year"
               type="number"
@@ -202,7 +236,7 @@
 </template>
 
 <script>
-import {email, numeric, required} from "vuelidate/lib/validators";
+import {alpha, email, numeric, required} from "vuelidate/lib/validators";
 
 export default {
   props: {
@@ -262,9 +296,11 @@ export default {
       required
     },
     firstName: {
+      alpha,
       required
     },
     lastName: {
+      alpha,
       required
     },
     parent: {
@@ -275,11 +311,13 @@ export default {
         })
       },
       firstName: {
+        alpha,
         required: required(() => {
           return !this.adult;
         })
       },
       lastName: {
+        alpha,
         required: required(() => {
           return !this.adult;
         })
@@ -331,6 +369,9 @@ export default {
           }
         }
       }
+    },
+    forceTextField(event) {
+      event.target.setAttribute('type', 'text');
     },
     formatBirthday(year, month, day) {
       return year && month && day ? `${year}-${month}-${day}` : undefined;
