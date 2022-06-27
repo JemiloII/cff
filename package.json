@@ -40,6 +40,6 @@
     "fibers": "^5.0.0",
     "https-localhost": "^4.4.1",
     "sass": "^1.30.0",
-    "sass-loader": "^10.1.0"
+    "sass-loader": "^13.0.1"
   }
 }
