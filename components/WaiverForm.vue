@@ -10,7 +10,12 @@
 
         <h4 class="title is-4">Parent or Guardian</h4>
         <b-field label="Parent Email" expanded>
-          <b-input class="is-dark" v-model="parent.email" type="email" required/>
+          <b-input
+            class="is-dark"
+            v-model.lazy.trim="parent.email"
+            type="email"
+            required
+          />
         </b-field>
 
         <b-field grouped group-multiline>
@@ -18,7 +23,7 @@
             <b-input
               class="is-dark"
               type="text"
-              v-model="parent.firstName"
+              v-model.lazy.trim="parent.firstName"
               @focus="forceTextField($event)"
               required
             />
@@ -27,7 +32,7 @@
             <b-input
               class="is-dark"
               type="text"
-              v-model="parent.lastName"
+              v-model.lazy.trim="parent.lastName"
               @focus="forceTextField($event)"
               required
             />
@@ -45,9 +50,9 @@
         <b-field label="Email" expanded>
           <b-input
             class="is-dark"
+            type="email"
             v-model.lazy.trim="email"
             @input.native="checkWaiver()"
-            type="email"
             required
           />
         </b-field>
@@ -57,10 +62,10 @@
         <b-field label="First Name" expanded>
           <b-input
             class="is-dark"
+            type="text"
             v-model.trim="firstName"
             @change.native="checkWaiver()"
             @focus="forceTextField($event)"
-            type="text"
             :key="'participantFirstName'"
             required
           />
@@ -68,10 +73,10 @@
         <b-field label="Last Name" expanded>
           <b-input
             class="is-dark"
+            type="text"
             v-model.trim="lastName"
             @change.native="checkWaiver()"
             @focus="forceTextField($event)"
-            type="text"
             :key="'participantLastName'"
             required
           />
@@ -83,40 +88,38 @@
         <b-field label="Month" expanded>
           <b-input
             class="is-dark"
+            type="text"
             v-model.lazy.trim="month"
-            type="number"
             min="1"
             max="12"
             v-mask="['##']"
             maxlength="2"
-            required
             placeholder="MM"
+            required
           />
         </b-field>
         <b-field label="Day" expanded>
           <b-input
             class="is-dark"
             v-model.lazy.trim="day"
-            type="number"
+            type="text"
             min="1"
             max="31"
             maxlength="2"
             v-mask="['##']"
-            required
             placeholder="DD"
+            required
           />
         </b-field>
         <b-field label="Year" expanded>
           <b-input
             class="is-dark"
             v-model.lazy="year"
-            type="number"
-            min="1900"
-            max="2050"
+            type="text"
             v-mask="['####']"
             maxlength="4"
-            required
             placeholder="YYYY"
+            required
           />
         </b-field>
       </b-field>
@@ -174,13 +177,12 @@
               :key="'month-child-' + (i + 2)"
               class="is-dark"
               v-model.lazy.trim="child.month"
-              type="number"
-              min="1"
-              max="12"
-              pattern="\d{2}"
+              type="text"
               maxlength="2"
-              required
+              v-mask="['##']"
+              pattern="\d{2}"
               placeholder="MM"
+              required
             />
           </b-field>
           <b-field label="Day" expanded>
@@ -188,13 +190,12 @@
               :key="'day-child-' + (i + 2)"
               class="is-dark"
               v-model.lazy.trim="child.day"
-              type="number"
-              min="1"
-              max="31"
+              type="text"
               maxlength="2"
+              v-mask="['##']"
               pattern="\d{2}"
-              required
               placeholder="DD"
+              required
             />
           </b-field>
           <b-field label="Year" expanded>
@@ -202,13 +203,12 @@
               :key="'year-child-' + (i + 2)"
               class="is-dark"
               v-model.lazy.trim="child.year"
-              type="number"
-              min="1900"
-              max="2050"
-              pattern="\d{4}"
+              type="text"
               maxlength="4"
-              required
+              v-mask="['####']"
+              pattern="\d{4}"
               placeholder="YYYY"
+              required
             />
           </b-field>
         </b-field>
@@ -252,19 +252,49 @@ export default {
     }
   },
   data() {
-    return {
-      month: undefined,
-      day: undefined,
-      year: undefined,
-      email: undefined,
-      firstName: undefined,
-      lastName: undefined,
-      additionalChildren: [],
-      parent: {
-        email: undefined,
-        firstName: undefined,
-        lastName: undefined
+    console.log('setting data hmmm')
+    const waiver = localStorage.getItem('waiver');
+    let month, year, day, firstName, lastName, email;
+    let parent = {};
+    let additionalChildren = [];
+
+    if (waiver) {
+      console.log('has waiver data???')
+      const {
+        birthday,
+        firstName: fn,
+        lastName: ln,
+        email: e,
+        parent: p,
+        additionalChildren: ac
+      } = JSON.parse(waiver);
+      year = birthday.slice(0, 4);
+      month = birthday.slice(5, 7);
+      day = birthday.slice(8);
+      firstName = fn;
+      lastName = ln;
+      email = e;
+      parent = p;
+
+      if (ac && ac.length > 0) {
+        additionalChildren = ac.map(child => {
+          child.year = child.birthday.slice(0, 4);
+          child.month = child.birthday.slice(5, 7);
+          child.day = child.birthday.slice(8);
+          return child;
+        });
       }
+    }
+
+    return {
+      month,
+      day,
+      year,
+      email,
+      firstName,
+      lastName,
+      additionalChildren,
+      parent
     };
   },
   computed: {
@@ -275,7 +305,10 @@ export default {
       return this.year === undefined || this.year.length < 4 || today - birthday > eighteenYears;
     },
     birthday() {
-      return this.year && this.month && this.day ? `${this.year}-${this.month}-${this.day}` : undefined;
+      const month = this.month && this.month.length !== 0 && this.month.length === 1 ? '0' + this.month : this.month;
+      const day = this.day && this.day.length !== 0 && this.day.length === 1 ? '0' + this.day : this.day;
+
+      return this.year && month && day ? `${this.year}-${month}-${day}` : undefined;
     }
   },
   validations: {
@@ -296,11 +329,9 @@ export default {
       required
     },
     firstName: {
-      alpha,
       required
     },
     lastName: {
-      alpha,
       required
     },
     parent: {
@@ -311,13 +342,11 @@ export default {
         })
       },
       firstName: {
-        alpha,
         required: required(() => {
           return !this.adult;
         })
       },
       lastName: {
-        alpha,
         required: required(() => {
           return !this.adult;
         })

@@ -9,7 +9,7 @@
     </template>
     <template slot="end">
       <b-navbar-item>
-        <a href="/waiver">
+        <a @click="goToWaiver()">
           <b-button type="is-secondary">
             New Waiver
           </b-button>
@@ -21,7 +21,13 @@
 
 <script>
 export default {
-  name: "Nav"
+  name: "Nav",
+  methods: {
+    goToWaiver() {
+      localStorage.removeItem('waiver');
+      location.pathname = '/waiver';
+    }
+  }
 };
 </script>
 
