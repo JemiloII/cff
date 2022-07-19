@@ -1,5 +1,5 @@
 <template>
-  <b-navbar>
+  <b-navbar type="is-dark">
     <template slot="brand">
       <b-navbar-item :to="{ path: '/' }" tag="nuxt-link">
         <h4 class="title is-4">
