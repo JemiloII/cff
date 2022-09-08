@@ -15,7 +15,7 @@
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/font-awesome": "^1.0.4",
     "axios": "^0.21.4",
-    "bootstrap": "^4.6.2",
+    "bootstrap": "^5.2.1",
     "bootstrap-vue": "^2.22.0",
     "caniuse-lite": "^1.0.30001367",
     "core-js": "^2.6.12",
