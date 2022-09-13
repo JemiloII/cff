@@ -21,7 +21,7 @@
     "core-js": "^2.6.12",
     "firebase": "^7.24.0",
     "nuxt": "^2.14.6",
-    "nuxt-buefy": "^0.3.20",
+    "nuxt-buefy": "^0.4.24",
     "nuxt-config": "^1.0.1",
     "nuxt-fontawesome": "^0.4.0",
     "qrcode": "^1.5.1",
