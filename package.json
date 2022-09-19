@@ -18,7 +18,7 @@
     "bootstrap": "^4.6.2",
     "bootstrap-vue": "^2.22.0",
     "caniuse-lite": "^1.0.30001367",
-    "core-js": "^2.6.12",
+    "core-js": "^3.25.2",
     "firebase": "^7.24.0",
     "nuxt": "^2.14.6",
     "nuxt-buefy": "^0.3.20",
