@@ -9,7 +9,7 @@
         <div class="blog-details">
           <div class="article-content">
             <p class="large-text">
-              Convention Foam Fighting (CFF) is a free-to-participate physical combat event.
+              Convention Foam Fighting, LLC (CFF) is a free-to-participate physical combat event.
               Using foam "boffer" weapons, participants take part in a variety of games, from
               team battles to tournament-style competitions. Participants of all ages and
               experience levels are welcome to play (participants under the age of 18 will
