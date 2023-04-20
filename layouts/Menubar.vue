@@ -17,6 +17,10 @@
                   <nuxt-link to="/" class="nav-link">Home</nuxt-link>
                 </li>
 
+                <li class="nav-item">
+                  <nuxt-link to="/events" class="nav-link">Events</nuxt-link>
+                </li>
+
 <!--                <li class="nav-item">-->
 <!--                  <nuxt-link to="/blog" class="nav-link">Blog</nuxt-link>-->
 <!--                </li>-->
